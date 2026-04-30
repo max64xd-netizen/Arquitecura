@@ -1,95 +1,151 @@
-# Arquitecura hexagonal
+# Arquitectura Hexagonal - Gestión de Tareas
 
----Descripción del problema
+## Descripción del problema
+
 En el ámbito académico, los estudiantes necesitan organizar sus actividades de forma clara y estructurada. Muchas veces no cuentan con una herramienta sencilla que les permita registrar, consultar y dar seguimiento a sus tareas.
 
-Esta aplicación resuelve ese problema permitiendo gestionar tareas académicas mediante operaciones básicas como 
--crear
--listar
--completar
--consultar pendientes
--eliminar tareas
+Esta aplicación permite gestionar tareas académicas mediante operaciones básicas como:
 
----Estructura del proyecto
+* Crear
+* Listar
+* Completar
+* Consultar tareas pendientes
+* Eliminar tareas
 
-├──org.example.tareashexagonal
- ├── domain │ 
-      ├── model  
-      │   └── Tarea.java 
-      ├── ports │ 
-           ├── input 
-                └── TareaUseCase.java 
-      ├── output │
-           └── TareaRepositoryPort.java
-      ├── usecase 
-           └── TareaUseCaseImpl.java
-      ├── exceptions
-            └── GlobalExceptionHandler.java
-      ├── infrastructure 
-           ├── adapters
-                └── TareaRepositoryAdapter.java    
-           ├── entrypoints 
-                ├── dto
-                   └── CrearTareaRequest.java
-           ├──TareaController.java 
-├──BeaConfig
-├──TareasHexagonalApplication
+---
 
----Pasos para ejecutar
+## Estructura del proyecto
 
--Clonar el repositorio:
--Abrir el proyecto en IntelliJ IDEA
--Ejecutar la clase principal:
--TareasHexagonalApplication.java
--Verificar que el servidor esté corriendo en:
--http://localhost:8080
+```
+org.example.tareashexagonal
+│
+├── domain
+│   ├── model
+│   │   └── Tarea.java
+│   ├── ports
+│   │   ├── input
+│   │   │   └── TareaUseCase.java
+│   │   └── output
+│   │       └── TareaRepositoryPort.java
+│   ├── usecase
+│   │   └── TareaUseCaseImpl.java
+│   └── exceptions
+│       └── GlobalExceptionHandler.java
+│
+├── infrastructure
+│   ├── adapters
+│   │   └── TareaRepositoryAdapter.java
+│   ├── entrypoints
+│   │   ├── dto
+│   │   │   └── CrearTareaRequest.java
+│   │   └── TareaController.java
+│
+├── config
+│   └── BeanConfig.java
+│
+└── TareasHexagonalApplication.java
+```
 
----Pruebas con Postman
---Crear tarea (POST)
+---
+
+## Pasos para ejecutar
+
+1. Clonar el repositorio
+2. Abrir el proyecto en IntelliJ IDEA
+3. Ejecutar la clase principal:
+
+```
+TareasHexagonalApplication.java
+```
+
+4. Verificar que el servidor esté corriendo en:
+
+```
+http://localhost:8080
+```
+
+---
+
+## Pruebas con Postman
+
+Crear tarea (POST)
+
+```
 http://localhost:8080/tareas
+```
 
-Body 
+Body:
+
+```json
 {
   "titulo": "Estudiar",
   "descripcion": "Arquitectura hexagonal"
 }
+```
 
---Listar tareas (GET)
+Listar tareas (GET)
+
+```
 http://localhost:8080/tareas
+```
 
---Completar tarea (PUT)
-http://localhost:8080/tareas/(id de la tarea)/completar 
-ejemplo 
+Completar tarea (PUT)
+
+```
+http://localhost:8080/tareas/{id}/completar
+```
+
+Ejemplo:
+
+```
 http://localhost:8080/tareas/1/completar
+```
 
---Eliminar tarea (DELETE)
-http://localhost:8080/tareas/(id de la tarea)
-ejemplo
+Eliminar tarea (DELETE)
+
+```
+http://localhost:8080/tareas/{id}
+```
+
+Ejemplo:
+
+```
 http://localhost:8080/tareas/1
+```
+
+---
+
+## Tecnologías usadas
+
+* Java 17
+* Spring Boot
+* Gradle
+* Postman
+* IntelliJ IDEA
 
 
----Tecnologías usadas
--Java 17
--Spring Boot
--Gradle
--Postman 
--IntelliJ IDEA
+## Explicación de puertos y adaptadores
 
----Explicación de puertos y adaptadores
+Puertos de entrada (Input Ports)
 
---Puertos de entrada (Input Ports)
--TareaUseCase
-Define las operaciones que el sistema puede realizar (crear, listar, completar, etc.)
+* TareaUseCase
+  Define las operaciones que el sistema puede realizar.
 
---Puertos de salida (Output Ports)
--TareaRepositoryPort
-Define cómo el dominio se comunica con la persistencia de datos, sin depender de una implementación específica.
+Puertos de salida (Output Ports)
 
---Adaptadores de entrada
--TareaController
--CrearTareaRequest (DTO)
-Reciben las peticiones HTTP y transforman los datos para el dominio.
+* TareaRepositoryPort
+  Define cómo el dominio se comunica con la persistencia.
 
---Adaptadores de salida
--TareaRepositoryAdapter
-Implementa la persistencia usando memoria (HashMap).
+Adaptadores de entrada
+
+* TareaController
+* CrearTareaRequest (DTO)
+
+Reciben las peticiones HTTP y envían la información al dominio.
+
+Adaptadores de salida
+
+* TareaRepositoryAdapter
+
+Implementa la persistencia utilizando una estructura en memoria (HashMap).
+
