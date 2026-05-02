@@ -1,10 +1,10 @@
-package org.example.tareashexagonal.domain.model;
+package org.example.tareashexagonal.domain.model; 
 
 public class Tarea {
-
+ 
     private Long id;
     private String titulo;
-    private String descripcion;
+    private String descripcion; 
     private boolean completada;
 
     public Tarea() {
