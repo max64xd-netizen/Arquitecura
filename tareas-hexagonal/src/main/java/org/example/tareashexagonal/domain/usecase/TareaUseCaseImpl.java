@@ -2,9 +2,9 @@ package org.example.tareashexagonal.domain.usecase;
 
 import org.example.tareashexagonal.domain.model.Tarea;
 import org.example.tareashexagonal.domain.ports.input.TareaUseCase;
-import org.example.tareashexagonal.domain.ports.output.TareaRepositoryPort;
+import org.example.tareashexagonal.domain.ports.output.TareaRepositoryPort; 
 
-import java.util.List;
+import java.util.List; 
 
 public class TareaUseCaseImpl implements TareaUseCase {
 
