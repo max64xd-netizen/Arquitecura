@@ -17,7 +17,6 @@ public class TareaUseCaseImpl implements TareaUseCase {
     @Override
     public Tarea crearTarea(String titulo, String descripcion) {
 
-        // 🔥 VALIDACIÓN DE NEGOCIO
         if (titulo == null || titulo.trim().isEmpty()) {
             throw new IllegalArgumentException("El título no puede estar vacío");
         }
