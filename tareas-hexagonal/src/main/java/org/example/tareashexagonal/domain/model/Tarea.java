@@ -7,7 +7,6 @@ public class Tarea {
     private String descripcion;
     private boolean completada;
 
-    // 🔥 Constructor vacío (CLAVE)
     public Tarea() {
     }
 
